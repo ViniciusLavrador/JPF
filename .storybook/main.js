@@ -10,6 +10,18 @@ module.exports = {
         "@storybook/addon-knobs",
     ],
     webpackFinal: async (config) => {
+        config.module.rules.push({
+            test: /\,css&/,
+            use: [
+                {
+                    loader: "postcss-loader",
+                    options: {
+                        ident: "postcss",
+                    },
+                },
+            ],
+            include: path.resolve(__dirname, "../"),
+        });
         return config;
     },
 };
